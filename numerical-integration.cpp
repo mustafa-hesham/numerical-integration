@@ -1,4 +1,4 @@
-//This code is written by Mustafa Hesham Mohamed to calculate approximate integration of a function using 1/3 Simpson's rule.
+//This code is written by Mustafa Hesham Mohamed to calculate approximate integration of a function using 1/3 Simpson's rule and Trabzoidal rule.
 //My student code at FSSR is 201800378.
 #include <iostream>
 #include <sstream>
@@ -15,6 +15,7 @@ int main(){
 	string repeat;
 	Repeat:
 	double finalresultsimp = 0;
+	double finalresultsimp8 = 0;
 	double finalresulttrab = 0;
 	cout<<"Please enter x0: ";
 	cin>>x0;
@@ -143,6 +144,10 @@ int main(){
 }
 }
 
+for (int y=0; y<=np; y++){
+	result[y] = 0;
+}
+
 for (int q=0; q<=np; q++){
 
 for (int s=0; s<n; s++){
@@ -210,9 +215,10 @@ for (int s=0; s<n; s++){
 			cin>>result[f];
 		}
 	}
-	
+		
 		cout<<"\n\n";
-		finalresultsimp = result[0] + result [np] + 4*result[1] + 4* result[np-1];
+		//Using 1/3 Simpson's rule:
+		finalresultsimp = result[0] + result[np] + 4*result[1] + 4*result[np-1];
 		
 		for (int s = 2; s<(np-1); s++){
 			if (s%2 == 0){
@@ -221,20 +227,45 @@ for (int s=0; s<n; s++){
 			else
 			finalresultsimp += 4*result[s];
 		}
+		finalresultsimp *= (h/3.0);
 		
+		//Using Trabzoidal rule:
 		finalresulttrab = result[0] + result[np];
 		
 		for (int u=1; u<=(np-1); u++){
 			finalresulttrab += 2*result[u];
 		}
 		
-		finalresultsimp *= (h/3.0);
+		
 		finalresulttrab *= (h/2.0);
+		
+		//Using 3/8 Simpson's rule:
+		
+		finalresultsimp8 = result[0] + result[np];
+		
+		for (int w = 1; w<=(np-1); w++){
+			if (w%3 == 0){
+				finalresultsimp8 += 2*result[w];
+			}
+			else
+			finalresultsimp8 += 3*result[w];
+		}
+		finalresultsimp8 *= (3*h/8.0);
+		
+		if (np%2 !=0) {
+			cout<<"Can't calculate using 1/3 Simpson's rule; odd intervals!"<<endl;
+			cout<<"\n\n";
+		}
+		else{
 		
 		cout<<"The approximate integration (using 1/3 Simpson) of this function is: "<<finalresultsimp<<endl;
 		cout<<"\n\n";
+	}
+		cout<<"The approximate integration (using 8/3 Simpson) of this function is: "<<finalresultsimp8<<endl;
+		cout<<"\n\n";
 		cout<<"The approximate integration (using Trabzoidal rule) of this function is: "<<finalresulttrab<<endl;
 		cout<<"\n\n\n\n";
+		
 		cout<<"Do you want to solve another problem? (Enter yes or y to repeat)"<<endl;
 		cin>>repeat;
 		if(repeat == "yes" || repeat == "y") goto Repeat;
