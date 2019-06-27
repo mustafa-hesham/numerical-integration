@@ -88,7 +88,7 @@ cout<<"Please enter power number "<<i+1<<" (Enter x if it is the power of a numb
 			}
 		}
 		else if(xe == "sin") {
-		//	coeff[i] = 1;
+	
 			termtype[i] ="sin";
 			cout <<"Please enter the power of sin x: "<<endl;
 			cin>>power[i];
@@ -161,7 +161,7 @@ for (int q=0; q<=np; q++){
 for (int s=0; s<n; s++){
 			if (power[s] == e && termtype[s] =="euler"){
 				result[q] += coeff[s] * pow(power[s], (xs[q]*xcoeff[s]));
-			//	cout <<"The euler term is equal to "<<coeff[s] * pow(power[s], (xs[q]*xcoeff[s]))<<endl;
+	
 				
 			}
 			if (termtype[s] =="xeuler"){
@@ -227,9 +227,9 @@ for (int s=0; s<n; s++){
 		
 		cout<<"\n\n";
 		//Using 1/3 Simpson's rule:
-		finalresultsimp = result[0] + result[np] + 4*result[1] + 4*result[np-1];
+		finalresultsimp = result[0] + result[np]; //+ 4*result[1] + 4*result[np-1];
 		
-		for (int s = 2; s<(np-1); s++){
+		for (int s = 1; s<=(np-1); s++){
 			if (s%2 == 0){
 				finalresultsimp += 2*result[s];
 			}
