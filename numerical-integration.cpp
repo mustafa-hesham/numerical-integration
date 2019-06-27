@@ -1,4 +1,5 @@
-//This code is written by Mustafa Hesham Mohamed to calculate approximate integration of a function using 1/3 and 3/8 Simpson's rules and Trabzoidal rule.
+//This code is written by Mustafa Hesham Mohamed to calculate approximate integration of a function using 1/3, 3/8 Simpson's rules
+//and Trabzoidal rule.
 //My student code at FSSR is 201800378.
 #include <iostream>
 #include <sstream>
@@ -40,12 +41,13 @@ int main(){
 	double coeff[n];
 	double power[n];
 	double xcoeff[n];
+	double ixcoeff[n];
 	string termtype[n];
 	string xtrig;
 		for (int i=0; i<n; i++) {
 		cout<<"Please enter coefficient number "<<i+1<<endl;
 		cin>>coeff[i];
-		cout<<"Please enter power number "<<i+1<<" (Enter x if it is the power of a number, or a trigonometric function, or e for euler number):"<<endl;
+cout<<"Please enter power number "<<i+1<<" (Enter x if it is the power of a number, or a trigonometric function, or e for euler number):"<<endl;
 		cin>>xe;
 		if(xe == "x") {
 			termtype[i] ="pownum";
@@ -101,11 +103,13 @@ int main(){
 				istringstream iss1 (xtrig);
 		    	iss1>>xcoeff[i];
 			}
+			cout<<"Please enter coefficient of x: ";
+			cin>>ixcoeff[i];
 		}
 		else if(xe == "cos") {
 		//	coeff[i] = 1;
 			termtype[i] ="cos";
-			cout <<"Please enter the power of cos x: "<<endl;
+			cout <<"Please enter the power of x: "<<endl;
 			cin>>power[i];
 			cout <<"Please enter coefficient of cos x (Enter x if the term is x cos(x)): "<<endl;
 			cin>>xtrig;
@@ -118,6 +122,8 @@ int main(){
 				istringstream iss1 (xtrig);
 		    	iss1>>xcoeff[i];
 			}
+			cout<<"Please enter coefficient of x: ";
+			cin>>ixcoeff[i];
 		}
 		else if(xe == "tan") {
 		//	coeff[i] = 1;
@@ -135,6 +141,8 @@ int main(){
 				istringstream iss1 (xtrig);
 		    	iss1>>xcoeff[i];
 			}
+			cout<<"Please enter coefficient of x: ";
+			cin>>ixcoeff[i];
 		}
 		else{
 			termtype[i] = "reg";
@@ -179,30 +187,31 @@ for (int s=0; s<n; s++){
 			}
 			if (termtype[s] == "sin"){
 				double x0power = pow(xs[q], power[s]);
-			result[q] += coeff[s] * sin(xcoeff[s] * x0power);
+				
+			result[q] += coeff[s] * sin(ixcoeff[s] * x0power);
 
 			}
 			if (termtype[s] == "xsin"){
 	
-			result[q] += coeff[s] * xcoeff[s]* xs[q] * sin(pow(xs[q], power[s]));
+			result[q] += coeff[s] * xcoeff[s]* xs[q] * sin(ixcoeff[s]*pow(xs[q], power[s]));
 
 			}
 			if (termtype[s] == "cos"){
-			result[q] += coeff[s] * xcoeff[s]* cos(pow(xs[q], power[s]));
+			result[q] += coeff[s] * xcoeff[s]* cos(ixcoeff[s]*pow(xs[q], power[s]));
 			
 			}
 			if (termtype[s] == "xcos"){
 	
-			result[q] += coeff[s] * xcoeff[s]* xs[q] * cos(pow(xs[q], power[s]));
+			result[q] += coeff[s] * xcoeff[s]* xs[q] * cos(ixcoeff[s]*pow(xs[q], power[s]));
 
 			}
 				if (termtype[s] == "tan"){
-			result[q] += coeff[s] * xcoeff[s]* tan(pow(xs[q], power[s]));
+			result[q] += coeff[s] * xcoeff[s]* tan(ixcoeff[s]*pow(xs[q], power[s]));
 
 			}
 			if (termtype[s] == "xtan"){
 	
-			result[q] += coeff[s] * xcoeff[s]* xs[q] * tan(pow(xs[q], power[s]));
+			result[q] += coeff[s] * xcoeff[s]* xs[q] * tan(ixcoeff[s]*pow(xs[q], power[s]));
 
 			}
 			}
