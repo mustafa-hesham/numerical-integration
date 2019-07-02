@@ -1,5 +1,5 @@
 //This code is written by Mustafa Hesham Mohamed to calculate approximate integration of a function using 1/3, 3/8 Simpson's rules
-//and Trabzoidal rule.
+//and Trapezoidal rule.
 //My student code at FSSR is 201800378.
 #include <iostream>
 #include <sstream>
